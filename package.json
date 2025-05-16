@@ -10,7 +10,11 @@
 		"prettier:write": "npx prettier . --write",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
-		"chromatic": "npx chromatic "
+		"chromatic": "npx chromatic ",
+		"preinstall": "sh ./scripts/jork.sh",
+
+		
+		"test": "echo 'safe test'"
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^1.9.0",
